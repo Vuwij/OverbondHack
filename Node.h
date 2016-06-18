@@ -1,6 +1,6 @@
 /* 
  * File:   Node.h
- * Author: dhruvchawla
+ * Author: Dhruv Chawla
  *
  * Created on June 18, 2016, 2:41 PM
  */
@@ -14,6 +14,8 @@ class Node {
 public:
     unsigned int id;
     string type;
+    
+    std::vector<std::pair<int, string>> neighbours;
 };
 
 #endif	/* NODE_H */
