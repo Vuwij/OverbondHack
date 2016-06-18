@@ -5,22 +5,23 @@
  * Created on June 18, 2016, 2:41 PM
  */
 
+#ifndef NODE_H
+#define	NODE_H
+
+#include <string>
 #include <vector>
 
 using namespace std;
-
-#ifndef NODE_H
-#define	NODE_H
 
 class Node {
 public:
     int id;
     string type;
     
-    std::vector<std::pair<int, string>> neighbours;
+    std::vector<std::pair<int, string> > neighbours;
     
-    Node();
-    void addNeighbours();
+    Node(int id_, string type_);
+    void addNeighbours(int Node_id, string connection);
 };
 
 #endif	/* NODE_H */
