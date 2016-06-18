@@ -16,12 +16,12 @@
 
 using namespace std;
 
-extern std::set<int> max_clique;
 extern int maxNumber;
 extern std::unordered_map<int, Node> NodeMap;
 extern std::set<int> Node_ids;
+extern std::set<int> max_clique;
 
-void CP(std::set<int> U, int size);
+void CP(std::set<int> C, std::set<int> P);
 void CP_start();
 
 #endif	/* ALGORITHMS_H */
