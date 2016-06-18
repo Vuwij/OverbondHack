@@ -30,6 +30,7 @@ void CP(std::set<int> U, int size) {
         
         int i = U.begin();
         U.erase(i);
+        max_clique.insert(i);
         
         Node* Node_i = NodeMap[i];
         std::set<int> U_new;
