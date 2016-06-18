@@ -5,6 +5,8 @@
  * Created on June 18, 2016, 2:41 PM
  */
 
+#include <vector>
+
 using namespace std;
 
 #ifndef NODE_H
@@ -16,6 +18,9 @@ public:
     string type;
     
     std::vector<std::pair<int, string>> neighbours;
+    
+    Node();
+    void addNeighbours();
 };
 
 #endif	/* NODE_H */
