@@ -1,13 +1,3 @@
 /build/
 /dist/
-/nbproject/*.xml
-
-*.xml
-
-nbproject/configurations.xml
-
-nbproject/project.xml
-
-nbproject/private/private.xml
-
-*.xml
+/nbproject/
