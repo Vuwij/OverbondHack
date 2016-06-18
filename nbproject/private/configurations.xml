@@ -23,8 +23,6 @@
       <in>Node.h</in>
       <in>main.cpp</in>
       <in>main.h</in>
-      <in>parser.cpp</in>
-      <in>parser.h</in>
     </df>
   </logicalFolder>
   <projectmakefile>Makefile</projectmakefile>
