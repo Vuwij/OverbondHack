@@ -53,7 +53,11 @@ void CP_start() {
 //}
 
 void CP(std::set<int> C, std::set<int> P) {
-    std::cout << max_clique.size() << endl;
+    std::set<int>::iterator it1;
+    for (it1 = max_clique.begin(); it1 != max_clique.end(); it1++) {
+        cout << *it1 << " ";
+    }
+    cout << endl;
     if (C.size() > max_clique.size()) max_clique = C;
     
     if (C.size() + P.size() > max_clique.size()) {

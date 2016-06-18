@@ -12,7 +12,6 @@
 #define PRINT_VALUES false
 
 #include "Node.h"
-#include "easygl/graphics.h"
 #include "algorithms.h"
 #include "display.h"
 
