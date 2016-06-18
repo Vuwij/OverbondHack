@@ -26,5 +26,6 @@ public:
     void dummy();
 };
 
+
 #endif	/* NODE_H */
 

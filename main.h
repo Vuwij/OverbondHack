@@ -14,6 +14,7 @@
 #include "Node.h"
 #include "easygl/graphics.h"
 #include "algorithms.h"
+#include "display.h"
 
 #include <iostream>
 #include <iomanip> 
@@ -39,6 +40,8 @@ void visualizeNodesAndEdges();
 
 // The formula that is used to solve the maximum clique problem
 void findMaximumClique();
+
+
 
 
 #endif	/* MAIN_H */

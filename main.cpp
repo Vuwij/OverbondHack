@@ -19,7 +19,7 @@ set<int> Node_ids;
 std::set<int> max_clique;
 
 int main(int argc, char** argv) {
-
+    
     // Loading the textual files as command line argument
     cout << "Loading World" << endl;
     
@@ -39,6 +39,8 @@ int main(int argc, char** argv) {
     chrono::duration<double> time_span = chrono::duration_cast<chrono::duration<double> >(t2 - t1);
     cout << "File loading time: " << std::setprecision(5) << time_span.count() << " seconds" << endl;
     
+    // Display on the map
+    //mainGL(argc, argv);
     
     // Start searching for the maximum clique problem
     cout << "Starting search for maximum clique" << endl;
@@ -119,11 +121,15 @@ void loadEdgesFromFile(string file) {
     }
 }
 
+<<<<<<< Updated upstream
 void loadNodesFromFile_v2(string file) {
     
 }
 
 void loadEdgesFromFile_v2(string file) {
+=======
+void visualizeNodesAndEdges() {
+>>>>>>> Stashed changes
     
 }
 

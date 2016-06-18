@@ -6,7 +6,10 @@
  */
 
 #include "algorithms.h"
+
 int maxNumber;
+
+void dummy() {}
 
 void CP_start() {
     maxNumber = 0;
