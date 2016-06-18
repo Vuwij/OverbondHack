@@ -12,6 +12,7 @@
 #define PRINT_VALUES false
 
 #include "Node.h"
+#include "easygl/graphics.h"
 #include "algorithms.h"
 
 #include <iostream>
@@ -27,9 +28,11 @@ string edgeFile;
 
 // Loads the nodes from the file into the NodeList class
 void loadNodesFromFile(string s);
+void loadNodesFromFile_v2(string s);
 
 // Loads the edges from the edge file onto the Nodes class
 void loadEdgesFromFile(string s);
+void loadEdgesFromFile_v2(string s);
 
 // Displays the nodes and edges onto the map, nodes can be issuers, investors, and dealors
 void visualizeNodesAndEdges();

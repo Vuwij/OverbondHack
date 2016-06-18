@@ -119,6 +119,14 @@ void loadEdgesFromFile(string file) {
     }
 }
 
+void loadNodesFromFile_v2(string file) {
+    
+}
+
+void loadEdgesFromFile_v2(string file) {
+    
+}
+
 void findMaximumClique() {
     CP_start();
     cout << max_clique.size() << endl;
