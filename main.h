@@ -12,6 +12,7 @@
 #define PRINT_VALUES false
 
 #include "Node.h"
+#include "algorithms.h"
 
 #include <iostream>
 #include <iomanip> 

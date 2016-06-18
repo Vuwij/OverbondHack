@@ -6,37 +6,34 @@
  */
 
 #include "algorithms.h"
-#include "Node.h"
-#include <unordered_map>
+int maxNumber;
 
-using namespace std;
+void CP_start() {
+    maxNumber = 0;
+    CP(Node_ids, 0);
+}
 
-std::set<int> max_clique;
-int max;
-extern std::unordered_map<int, Node> NodeMap;
-extern std::set<int> Node_ids;
 
 void CP(std::set<int> U, int size) {
     if (U.size() == 0) {
-        if (size > max) {
-            max = size;
+        if (size > maxNumber) {
+            maxNumber = size;
         }
         return;
     }
     while (U.size() > 0) {
-        if (U.size() + size <= max){
+        if (U.size() + size <= maxNumber){
             return;
         }
         
-        int i = U.begin();
+        int i = *(U.begin());
         U.erase(i);
         max_clique.insert(i);
         
-        Node* Node_i = NodeMap[i];
         std::set<int> U_new;
         
-        for (unsigned int j = 0; j < Node_i->neighbours.size(); j++) {
-            int neighbour_id = Node_i->neighbours[j].first;
+        for (unsigned int j = 0; j < NodeMap[i].neighbours.size(); j++) {
+            int neighbour_id = NodeMap[i].neighbours[j].first;
             if (U.find(neighbour_id) != U.end()) U_new.insert(neighbour_id);
         }
         
@@ -47,8 +44,3 @@ void CP(std::set<int> U, int size) {
     return;
 }
 
-std::set<int> CP_start() {
-    max = 0;
-    CP(Node_ids, 0);
-    return max_clique;
-}

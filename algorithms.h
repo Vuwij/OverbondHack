@@ -9,13 +9,20 @@
 #define	ALGORITHMS_H
 
 #include "Node.h"
+
 #include <set>
 #include <unordered_set>
+#include <unordered_map>
 
 using namespace std;
 
+extern std::set<int> max_clique;
+extern int maxNumber;
+extern std::unordered_map<int, Node> NodeMap;
+extern std::set<int> Node_ids;
+
 void CP(std::set<int> U, int size);
-std::set<int> CP_start();
+void CP_start();
 
 #endif	/* ALGORITHMS_H */
 

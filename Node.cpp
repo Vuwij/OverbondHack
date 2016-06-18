@@ -7,6 +7,8 @@
 
 #include "Node.h"
 
+Node::Node() {}
+
 Node::Node(int id_, string type_) {
     id = id_;
     type = type_;

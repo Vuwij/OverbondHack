@@ -7,14 +7,19 @@
 
 #include "main.h"
 #include "Node.h"
+#include "algorithms.h"
 
-using namespace std::chrono;
+#include <set>
+#include <unordered_map>
 
-std::unordered_map<int, Node> NodeMap;
-std::set<int> Node_ids;
+using namespace std;
+
+unordered_map<int, Node> NodeMap;
+set<int> Node_ids;
+std::set<int> max_clique;
 
 int main(int argc, char** argv) {
-    
+
     // Loading the textual files as command line argument
     cout << "Loading World" << endl;
     
@@ -31,7 +36,7 @@ int main(int argc, char** argv) {
     loadEdgesFromFile("World/" + edgeFile);
     auto t2 = chrono::high_resolution_clock::now();
     
-    duration<double> time_span = duration_cast<duration<double> >(t2 - t1);
+    chrono::duration<double> time_span = chrono::duration_cast<chrono::duration<double> >(t2 - t1);
     cout << "File loading time: " << std::setprecision(5) << time_span.count() << " seconds" << endl;
     
     
@@ -43,7 +48,7 @@ int main(int argc, char** argv) {
     findMaximumClique();
     auto t4 = chrono::high_resolution_clock::now();
     
-    duration<double> time_span_2 = duration_cast<duration<double> >(t4 - t3);
+    chrono::duration<double> time_span_2 = chrono::duration_cast<chrono::duration<double> >(t4 - t3);
     cout << "Maximum clique search time: " << std::setprecision(5) << time_span_2.count() << " seconds" << endl;
     
     return 0;
@@ -65,7 +70,9 @@ void loadNodesFromFile(string file) {
             fStream >> nodeID >> nodeType;
             if(PRINT_VALUES) cout << nodeID << " " << nodeType << endl;
             // Process the file
-            //Nodes.Add(nodeID, nodeType);
+            Node_ids.insert(nodeID);
+            Node newNode(nodeID, nodeType);
+            NodeMap.emplace(nodeID, newNode);
         }
         fStream.close();
         
@@ -85,8 +92,8 @@ void loadEdgesFromFile(string file) {
     
     // The type of nodes and edges to parse
     char e;
-    short from = 0;
-    short to = 0;
+    int from = 0;
+    int to = 0;
     string type = "";
     
     try {
@@ -96,7 +103,9 @@ void loadEdgesFromFile(string file) {
             fStream >> e >> from >> to >> type;
             if(PRINT_VALUES) cout << "Path: " << from << " " << to << " " << type << endl;
             // Process the file
-            //Nodes.Add(nodeID, nodeType);
+            
+            NodeMap[from].addNeighbours(to, type);
+            NodeMap[to].addNeighbours(from, type);
         }
         
         fStream.close();
@@ -111,5 +120,6 @@ void loadEdgesFromFile(string file) {
 }
 
 void findMaximumClique() {
-    
+    CP_start();
+    cout << max_clique.size() << endl;
 }
