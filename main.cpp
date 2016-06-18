@@ -6,8 +6,12 @@
  */
 
 #include "main.h"
+#include "Node.h"
 
 using namespace std::chrono;
+
+std::unordered_map<int, Node> NodeMap;
+std::set<int> Node_ids;
 
 int main(int argc, char** argv) {
     

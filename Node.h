@@ -14,7 +14,7 @@ using namespace std;
 
 class Node {
 public:
-    unsigned int id;
+    int id;
     string type;
     
     std::vector<std::pair<int, string>> neighbours;
