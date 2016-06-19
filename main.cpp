@@ -15,7 +15,6 @@
 using namespace std;
 
 unordered_map<int, Node> NodeMap;
-set<int> Node_ids;
 std::set<int> max_clique;
 
 int main(int argc, char** argv) {
@@ -34,6 +33,7 @@ int main(int argc, char** argv) {
     auto t1 = chrono::high_resolution_clock::now();
     loadNodesFromFile("World/" + nodeFile);
     loadEdgesFromFile("World/" + edgeFile);
+        
     auto t2 = chrono::high_resolution_clock::now();
     
     chrono::duration<double> time_span = chrono::duration_cast<chrono::duration<double> >(t2 - t1);
@@ -70,16 +70,16 @@ void loadNodesFromFile(string file) {
         fStream.open (file);
         while (!fStream.eof()) {
             fStream >> nodeID >> nodeType;
-            if(PRINT_VALUES) cout << nodeID << " " << nodeType << endl;
             // Process the file
-            Node_ids.insert(nodeID);
-            Node newNode(nodeID, nodeType);
-            NodeMap.emplace(nodeID, newNode);
+            NodeMap.emplace(nodeID, Node(nodeID, nodeType));
         }
-        fStream.close();
-        
+        printEntireMap();
     } catch (ifstream::failure e) {
-        if(fStream.eof()) return;
+        if(fStream.eof()) {
+            fStream.close();
+            
+            return;
+        }
         
         std::cout << "Error while reading file: " << file << endl;
         std::cout << e.what();
@@ -103,7 +103,6 @@ void loadEdgesFromFile(string file) {
         
         while (!fStream.eof()) {
             fStream >> e >> from >> to >> type;
-            if(PRINT_VALUES) cout << "Path: " << from << " " << to << " " << type << endl;
             // Process the file
             
             NodeMap[from].addNeighbours(to, type);
@@ -121,19 +120,27 @@ void loadEdgesFromFile(string file) {
     }
 }
 
-<<<<<<< Updated upstream
-void loadNodesFromFile_v2(string file) {
+void visualizeNodesAndEdges() {
     
 }
 
-void loadEdgesFromFile_v2(string file) {
-=======
-void visualizeNodesAndEdges() {
->>>>>>> Stashed changes
-    
+void printEntireMap() {
+    for(int i = 0; i < NodeMap.size(); i++) {
+        NodeMap[i].print();
+    }
 }
 
 void findMaximumClique() {
-    CP_start();
-    cout << max_clique.size() << endl;
+    printEntireMap();
+    
+    for(int i = 1; i < NodeMap.size(); i++) {
+        P.insert(NodeMap[i].id);
+    }
+    
+    Bron_kerbosch(P, R, X);
+    
+    cout << "Maximum Clique Size: " << currentMax.size() << endl;
+    cout << "Clique contains: ";
+    printGroup(currentMax);
+    cout << endl;
 }

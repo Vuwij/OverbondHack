@@ -9,10 +9,9 @@
 #define	MAIN_H
 
 #define LOAD_FROM_FOLDER true
-#define PRINT_VALUES false
+#define PRINT_VALUES true
 
 #include "Node.h"
-#include "easygl/graphics.h"
 #include "algorithms.h"
 #include "display.h"
 
@@ -29,11 +28,9 @@ string edgeFile;
 
 // Loads the nodes from the file into the NodeList class
 void loadNodesFromFile(string s);
-void loadNodesFromFile_v2(string s);
 
 // Loads the edges from the edge file onto the Nodes class
 void loadEdgesFromFile(string s);
-void loadEdgesFromFile_v2(string s);
 
 // Displays the nodes and edges onto the map, nodes can be issuers, investors, and dealors
 void visualizeNodesAndEdges();
@@ -41,7 +38,8 @@ void visualizeNodesAndEdges();
 // The formula that is used to solve the maximum clique problem
 void findMaximumClique();
 
-
+// Prints the entire map
+void printEntireMap();
 
 
 #endif	/* MAIN_H */

@@ -14,18 +14,17 @@
 #include <unordered_set>
 #include <unordered_map>
 
+typedef std::unordered_set<short> group;
 
-extern int maxNumber;
 extern std::unordered_map<int, Node> NodeMap;
-extern std::set<int> Node_ids;
-extern std::set<int> max_clique;
 
-<<<<<<< Updated upstream
-void CP(std::set<int> C, std::set<int> P);
-=======
->>>>>>> Stashed changes
-void CP_start();
-void CP(std::set<int> U, int size);
+extern group R;
+extern group P;
+extern group X;
+extern group currentMax;
+
+void printGroup(group& G);
+void Bron_kerbosch(group P, group R, group X);
 
 #endif	/* ALGORITHMS_H */
 

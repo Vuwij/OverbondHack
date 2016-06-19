@@ -15,7 +15,7 @@ using namespace std;
 
 class Node {
 public:
-    int id;
+    int id = -1;
     string type;
     
     std::vector<std::pair<int, string> > neighbours;
@@ -24,6 +24,8 @@ public:
     Node(int id_, string type_);
     void addNeighbours(int Node_id, string connection);
     void dummy();
+    
+    void print();
 };
 
 

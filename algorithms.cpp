@@ -6,68 +6,120 @@
  */
 
 #include "algorithms.h"
+#include <iomanip>
+/**********************************************************/
+// Bron-Kerbosch Algorithm
+// R = {}
+// P = {v}
+// X = {}
 
-int maxNumber;
+//proc BronKerbosch(P,R,X)
+// if (P U X) = {} then
+//      print set as maximal clique
+// end if
+// for each vertex C in P \ nbrs(v) do
+//      Bron-Kerbosch(P intersect nbrs(v), R U {v}, X intersect(v))
+//      P = P \ {v}
+//      X = X U {v}
+// end for
+/**********************************************************/
+typedef std::unordered_set<short> group;
+int stackDepth = 0;
 
-void dummy() {}
-
-void CP_start() {
-    maxNumber = 0;
-    std::set<int> empty_set;
-    CP(empty_set, Node_ids);
+group groupUnion(group A, group B) {
+    group C;
+    
+    for(auto it = A.begin(); it != A.end(); it++) {
+        C.insert(*it);
+    }
+    
+    for(auto it = B.begin(); it != B.end(); it++) {
+        C.insert(*it);
+    }
+    
+    return C;
 }
 
-
-//std::set<int> CP(std::set<int> U, int size, std::set<int> max_clique) {
-//    if (U.size() == 0) {
-//        if (size > maxNumber) {
-//            maxNumber = size;
-//        }
-//        return max_clique;
-//    }
-//    while (U.size() > 0) {
-//        if (U.size() + size <= maxNumber){
-//            std::set<int> emptySet;
-//            cout << "One" << endl;
-//            return emptySet;
-//        }
-//        
-//        int i = *(U.begin());
-//        U.erase(i);
-//        max_clique.insert(i);
-//        
-//        std::set<int> U_new;
-//        
-//        for (unsigned int j = 0; j < NodeMap[i].neighbours.size(); j++) {
-//            int neighbour_id = NodeMap[i].neighbours[j].first;
-//            if (U.find(neighbour_id) != U.end()) U_new.insert(neighbour_id);
-//        }
-//        
-//        size++;
-//        CP(U_new, size, max_clique);
-//        
-//    }
-//    std::set<int> emptySet;
-//    cout << "Two" << endl;
-//    return emptySet;
-//}
-
-void CP(std::set<int> C, std::set<int> P) {
-    std::cout << max_clique.size() << endl;
-    if (C.size() > max_clique.size()) max_clique = C;
+group groupIntersect(group A, group B) {
+    group C;
     
-    if (C.size() + P.size() > max_clique.size()) {
-        std::set<int>::iterator it;
-        for (it = P.begin(); it != P.end(); it++) {
-            C.insert(*it);
-            
-            std::set<int> P_new;
-            
-            for (unsigned i = 0; i < NodeMap[*it].neighbours.size(); i++) {
-                int neighbour_id = NodeMap[*it].neighbours[i].first;
-                if (P.find(neighbour_id) != P.end()) P_new.insert(neighbour_id);
-            }
-            CP(C, P_new);
+    for(auto it = A.begin(); it != A.end(); it++) {
+        if(B.find(*it) != B.end()) C.insert(*it);
+    }
+    
+    return C;
+}
+
+void printGroup(group& G) {
+    cout << "{";
+    for(auto it = G.begin(); it != G.end(); it++) {
+        cout << *it << ",";
+    }
+    cout << "}";
+}
+
+void printStackGroup(group& R, group& P, group& X) {
+    cout << setw(stackDepth*3) << " ";
+    printGroup(R);
+    printGroup(P);
+    printGroup(X);
+    
+    if(P.size() == 0 && X.size() == 0) {
+        cout << "--- Maximal Clique ";
+        printGroup(R);
+        if(R.size() >= currentMax.size()) {
+            currentMax = R;
         }
     }
+    
+    cout << endl;
 }
+
+// Bron-Kerbosch Algorithm
+// R = {}
+// P = {v}
+// X = {}
+
+group R;
+group P;
+group X;
+group currentMax;
+
+//proc BronKerbosch(P,R,X)
+void Bron_kerbosch(group P, group R, group X) {
+    // if (P U X) = {} then
+    //  print set as maximal clique
+    printStackGroup(R, P, X);
+    if(P.size() == 0 && X.size() == 0) {
+        return;
+    }
+    
+    // for each vertex v in P do
+    while(P.size() > 0) {
+        auto it = P.begin();
+        
+        group nbrs_v, v;
+        v.insert(*it);
+        for(int i = 0; i < NodeMap[*it].neighbours.size(); i++) {
+            nbrs_v.insert(NodeMap[*it].neighbours[i].first);
+        }
+        
+    //  Bron-Kerbosch(P intersect nbrs(v), R U {v}, X intersect nbrs(v))
+        stackDepth = stackDepth + 2;
+        Bron_kerbosch(
+                groupIntersect(P, nbrs_v),
+                groupUnion(R, v),
+                groupIntersect(X, nbrs_v)
+                );
+        stackDepth = stackDepth - 2;
+    
+    //  P = P \ {v}
+        P.erase(*it);
+        
+    //  X = X U {v}
+        X = groupUnion(X, v);
+        
+    // end for        
+    }
+}
+
