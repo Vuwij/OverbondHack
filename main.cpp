@@ -131,7 +131,7 @@ void printEntireMap() {
 }
 
 void findMaximumClique() {
-    printEntireMap();
+    if(PRINT_VALUES) printEntireMap();
     
     for(int i = 1; i < NodeMap.size(); i++) {
         P.insert(NodeMap[i].id);

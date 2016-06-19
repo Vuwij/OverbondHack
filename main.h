@@ -9,7 +9,7 @@
 #define	MAIN_H
 
 #define LOAD_FROM_FOLDER true
-#define PRINT_VALUES true
+#define PRINT_VALUES false
 
 #include "Node.h"
 #include "algorithms.h"

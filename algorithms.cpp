@@ -5,6 +5,8 @@
  * Created on June 18, 2016, 3:20 PM
  */
 
+#define PRINT_VALUES false
+
 #include "algorithms.h"
 #include <iomanip>
 /**********************************************************/
@@ -89,7 +91,7 @@ group currentMax;
 void Bron_kerbosch(group P, group R, group X) {
     // if (P U X) = {} then
     //  print set as maximal clique
-    printStackGroup(R, P, X);
+    if(PRINT_VALUES) printStackGroup(R, P, X);
     if(P.size() == 0 && X.size() == 0) {
         return;
     }
